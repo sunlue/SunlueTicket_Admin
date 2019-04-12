@@ -11,7 +11,7 @@
 		</div>
 		<div class="main-form">
 			<div class="main-area">
-				<div v-if="(activeMenu=='type')">
+				<div v-show="(activeMenu=='type')">
 					<Row>
 						<Col :xs="{span:16}" :sm="{span:12}" :lg="{span:8}">
 						<Form ref="tickeTypeForm" :model="tickeType.form" :label-width="80">
@@ -44,8 +44,7 @@
 						</Col>
 					</Row>
 				</div>
-				<div v-if="(activeMenu=='know')">
-
+				<div v-show="(activeMenu=='know')">
 					<div class="search">
 						<Form ref="tickeKnowSearchForm" :model="tickeKnow.search.form.fields" :label-width="0" inline>
 							<FormItem>
@@ -135,7 +134,7 @@
 						<div v-html="tickeKnow.table.modal.content"></div>
 					</Modal>
 
-					<Modal v-model="tickeKnow.modal.show" :width="tickeKnow.modal.width" :footer-hide="true" :draggable="true" :title='tickeKnow.modal.title'>
+					<Modal v-model="tickeKnow.modal.show" :width="tickeKnow.modal.width" :footer-hide="true" :title='tickeKnow.modal.title'>
 						<Form ref="tickeKnowForm" :model="tickeKnow.form.fields" :rules="tickeKnow.form.rules" :label-width="80">
 							<Tabs value="book">
 								<TabPane label="预订说明" name="book">
@@ -221,11 +220,6 @@
 								<TabPane label="发票说明" name="invoice">
 									<FormItem :label-width="0">
 										<Tinymce ref="invoice" v-model="tickeKnow.form.fields.invoice" />
-									</FormItem>
-								</TabPane>
-								<TabPane label="其他说明" name="other">
-									<FormItem :label-width="0">
-										<Tinymce ref="other" v-model="tickeKnow.form.fields.other" />
 									</FormItem>
 								</TabPane>
 								<div slot="extra">
@@ -544,7 +538,6 @@
 							details: '',
 							refund: '',
 							invoice: '',
-							other: ''
 						},
 						rules: {}
 					}
@@ -626,7 +619,6 @@
 				this.$refs.fee.setContent('');
 				this.$refs.refund.setContent('');
 				this.$refs.invoice.setContent('');
-				this.$refs.other.setContent('');
 			},
 			tickeKnowFormSubmit() {
 				var formParams = this.tickeKnow.form.fields;
@@ -664,7 +656,6 @@
 				this.$refs.fee.setContent(row.fee);
 				this.$refs.refund.setContent(row.refund);
 				this.$refs.invoice.setContent(row.invoice);
-				this.$refs.other.setContent(row.other);
 			},
 			tickeKnowFormSave() {
 				var formParams = this.tickeKnow.form.fields;

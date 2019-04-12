@@ -50,7 +50,9 @@
 								<Row>
 									<Col span="12">原价：<span class="price original">${{item.original}}</span>元</Col>
 									<Col span="12">售价：<span class="price present">${{item.present}}</span>元</Col>
-									<Col span="24" class="intro">{{item.intro?item.intro:'暂无简介'}}</Col>
+									<Col span="24" class="intro" v-if="false">
+										<div v-html="item.intro?item.intro:'暂无简介'"></div>
+									</Col>
 									<Col span="18" class="tools">
 									<Tooltip :content="(item.shelves=='yes'?'下架':'上架')" placement="top-start">
 										<Icon custom="iconfont icon-shelves" :active="item.shelves" @click="clickAttr(item,index,'shelves')" />
@@ -99,18 +101,16 @@
 			</div>
 		</div>
 
-		<Modal ref="addModal" v-model="addModal" :title="'添加'+activeMenu.name" draggable scrollable width="800">
+		<Modal ref="addModal" v-model="addModal" :title="'添加'+activeMenu.name" scrollable width="800">
 			<p slot="footer">
 				<Button type="info" @click="handleSubmit">确定</Button>
 			</p>
 			<Row>
-				<Col span="15">
 				<Form ref="addForm" :model="addForm" :rules="addFormRule" :label-width="80">
+					<Col span="15">
+
 					<FormItem label="显示名称" prop="name">
 						<Input :placeholder="activeMenu.name+'显示名称,例如:网络即时'+activeMenu.name" v-model="addForm.name"></Input>
-					</FormItem>
-					<FormItem :label="activeMenu.name+'简介'">
-						<Input :placeholder="activeMenu.name+'简短介绍'" type="textarea" v-model="addForm.intro"></Input>
 					</FormItem>
 					<FormItem :label="activeMenu.name+'原价'" prop="price">
 						<InputNumber v-model='addForm.original' :step="1.00"></InputNumber>
@@ -123,32 +123,30 @@
 						<Checkbox label="recom" v-model="addForm.recom" true-value="yes" false-value="no">推荐</Checkbox>
 						<Checkbox label="top" v-model="addForm.top" true-value="yes" false-value="no">置顶</Checkbox>
 					</FormItem>
-					<FormItem label="动态价格">
+					<FormItem :label="activeMenu.name+'设置'">
 						<Button type="primary" icon="logo-usd" @click="priceModal=true">动态价格</Button>
-					</FormItem>
-					<FormItem label="票务须知">
 						<ButtonGroup>
 							<Button type="primary" icon="ios-help-buoy" @click="knowModal.show=true">票务须知</Button>
 							<Button v-if="addForm.know_id">已选择:{{addForm.know_id}}</Button>
 						</ButtonGroup>
 					</FormItem>
-				</Form>
-				</Col>
-				<Col span="8" offset="1">
-				<Upload ref="upload" type="drag" :action="upload.url" :headers="upload.header" accept="image" :format="['jpg','jpeg','png']"
-				 name="file" :data="{uploadType:'img'}" :show-upload-list="false" :on-success="uploadSuccess">
-					<div style="padding: 20px 0">
-						<Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-						<p>点击或拖动文件上传</p>
-					</div>
-				</Upload>
-				<Card v-if="upload.name" :title="upload.name">
-					<div class="text-center">
-						<img :src="upload.path" style="max-width: 100%;max-height: 200px;" />
-					</div>
+					</Col>
+					<Col span="8" offset="1">
+					<Upload ref="upload" type="drag" :action="upload.url" :headers="upload.header" accept="image" :format="['jpg','jpeg','png']"
+					 name="file" :data="{uploadType:'img'}" :show-upload-list="false" :on-success="uploadSuccess">
+						<div :style="'padding:50px 0px;background:url('+upload.path+');background-size:100% 100%;'">
+							<Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+							<p style="color: #3399FF;">点击或拖动文件上传</p>
+						</div>
+					</Upload>
 					<Button type="warning" size="small" long @click="uploadDel">删除</Button>
-				</Card>
-				</Col>
+					</Col>
+					<Col span="24">
+					<FormItem :label="activeMenu.name+'介绍'">
+						<Tinymce ref="intro" v-model="addForm.intro" />
+					</FormItem>
+					</Col>
+				</Form>
 			</Row>
 		</Modal>
 
@@ -252,18 +250,16 @@
 			</p>
 		</Modal>
 
-		<Modal ref="editModal" v-model="editModal" :title="'修改'+editForm.name" draggable scrollable width="800">
+		<Modal ref="editModal" v-model="editModal" :title="'修改'+editForm.name" scrollable width="800">
 			<p slot="footer">
 				<Button type="info" @click="handleEdit">确定</Button>
 			</p>
 			<Row>
-				<Col span="15">
 				<Form ref="editForm" :model="editForm" :rules="addFormRule" :label-width="80">
+					<Col span="15">
+
 					<FormItem label="显示名称" prop="name">
 						<Input :placeholder="editForm.name+'显示名称,例如:网络即时'+activeMenu.name" v-model="editForm.name"></Input>
-					</FormItem>
-					<FormItem :label="activeMenu.name+'简介'">
-						<Input :placeholder="activeMenu.name+'简短介绍'" type="textarea" v-model="editForm.intro"></Input>
 					</FormItem>
 					<FormItem :label="activeMenu.name+'原价'" prop="price">
 						<InputNumber v-model='editForm.original' :step="1.00"></InputNumber>
@@ -276,28 +272,33 @@
 						<Checkbox label="recom" v-model="editForm.recom" true-value="yes" false-value="no">推荐</Checkbox>
 						<Checkbox label="top" v-model="editForm.top" true-value="yes" false-value="no">置顶</Checkbox>
 					</FormItem>
-				</Form>
-				</Col>
-				<Col span="8" offset="1">
-				<Upload ref="upload" type="drag" :action="upload.url" :headers="upload.header" accept="image" :format="['jpg','jpeg','png']"
-				 name="file" :data="{uploadType:'img'}" :show-upload-list="false" :on-success="uploadSuccess">
-					<div style="padding: 20px 0">
-						<Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
-						<p>点击或拖动文件上传</p>
-					</div>
-				</Upload>
-				<Card v-if="upload.path" :title="upload.name">
-					<div class="text-center">
-						<img :src="upload.path" style="max-width: 100%;max-height: 200px;" />
-					</div>
+					<FormItem :label="activeMenu.name+'设置'">
+						<ButtonGroup>
+							<Button type="primary" icon="ios-help-buoy" @click="knowModal.show=true">票务须知</Button>
+							<Button v-if="editForm.know_id">已选择:{{editForm.know_id}}</Button>
+						</ButtonGroup>
+					</FormItem>
+					</Col>
+					<Col span="8" offset="1">
+					<Upload ref="upload" type="drag" :action="upload.url" :headers="upload.header" accept="image" :format="['jpg','jpeg','png']"
+					 name="file" :data="{uploadType:'img'}" :show-upload-list="false" :on-success="uploadSuccess">
+						<div :style="'padding:50px 0px;background-image:url('+upload.path+');background-size:100% 100%;'">
+							<Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+							<p style="color: #3399FF;">点击或拖动文件上传</p>
+						</div>
+					</Upload>
 					<Button type="warning" size="small" long @click="uploadDel">删除</Button>
-				</Card>
-				</Col>
+					</Col>
+					<Col span="24">
+					<FormItem :label="activeMenu.name+'介绍'">
+						<Tinymce ref="editIntro" v-model="editForm.intro" />
+					</FormItem>
+					</Col>
+				</Form>
 			</Row>
 		</Modal>
 
-		<Modal ref="knowModal" v-model="knowModal.show" title="票务须知" footer-hide scrollable :z-index="1001" :closable="false"
-		 :mask-closable="false">
+		<Modal ref="knowModal" v-model="knowModal.show" title="票务须知" footer-hide scrollable :z-index="1001" :closable="false" :mask-closable="false">
 			<Table border :data="knowModal.data" :columns="knowModal.columns" size="small"></Table>
 		</Modal>
 		<Drawer :closable="false" width="414" v-model="knowModal.drawer.show" class-name="drawer">
@@ -356,8 +357,13 @@
 </template>
 
 <script>
+	import Tinymce from '@/components/Tinymce'
+	import request from '@/utils/request'
 	export default {
 		name: 'ticket_list',
+		components: {
+			Tinymce,
+		},
 		data() {
 			return {
 				knowModal: {
@@ -414,6 +420,7 @@
 									on: {
 										click: () => {
 											that.addForm.know_id = params.row.uniqid
+											that.editForm.know_id = params.row.uniqid
 											that.knowModal.show = false;
 										}
 									}
@@ -605,10 +612,18 @@
 				this.upload.hash = response.data.hash;
 			},
 			uploadDel() {
-				this.upload.name = '';
-				this.upload.path = '';
-				this.upload.hash = '';
-				this.$refs.upload.clearFiles;
+				request({
+					url: 'removeUpload',
+					method: 'post',
+					data: {
+						hash: this.upload.hash
+					}
+				}).then(() => {
+					this.upload.name = '';
+					this.upload.path = '';
+					this.upload.hash = '';
+					this.$refs.upload.clearFiles;
+				})
 			},
 			handleLoadMore() {
 				var that = this;
@@ -647,10 +662,12 @@
 					recom: data['recom'],
 					id: data['id'],
 					top: data['top'],
+					know_id:data['know_id']
 				};
 				this.upload.path = data.thumb;
 				this.upload.hash = data.thumbHash;
 				this.upload.name = data.name;
+				this.$refs.editIntro.setContent(data.intro);
 				this.editModal = true;
 				this.editIndex = index;
 			},

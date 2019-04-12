@@ -72,6 +72,7 @@
 							center: 'title',
 							right: 'month,listMonth'
 						},
+						aspectRatio:1.8,
 						locale: 'zh-cn',
 						buttonText: {
 							prev: '上月',
