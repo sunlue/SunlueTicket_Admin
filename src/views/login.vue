@@ -91,6 +91,8 @@
 		components: {
 			drag: drag
 		},
+		created(){
+		},
 		methods: {
 			switchLoginType: function(type) {
 				this.loginType = type;

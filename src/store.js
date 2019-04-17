@@ -1,17 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-
-import user from '@/store/user'
-import ticket from '@/store/ticket'
-import pay from '@/store/pay'
-import order from '@/store/order'
-import config from '@/store/config'
+import app from '@/store/app'
+import user from '@/store/module/user'
+import ticket from '@/store/module/ticket'
+import pay from '@/store/module/pay'
+import order from '@/store/module/order'
+import config from '@/store/module/config'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	modules: {
+		app,
 		user,
 		pay,
 		ticket,
@@ -24,6 +25,9 @@ const store = new Vuex.Store({
 		},
 		token: state => {
 			return state.user.token ? state.user.token : sessionStorage.getItem('token');
+		},
+		menu: state => {
+			return state.app.menu;
 		}
 	}
 })

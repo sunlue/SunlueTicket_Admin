@@ -1,11 +1,10 @@
 <template>
-	<div id="app">
-		<router-view />
-	</div>
+	<div id="app"><router-view /></div>
 </template>
-<style>
-	@import url("//at.alicdn.com/t/font_1065691_l28v8faezfa.css");
-	@import url("styles/app.css");
+<style lang="less">
+	@import url('//at.alicdn.com/t/font_1065691_zryceo2sacs.css');
+	@import url('styles/app.css');
+	@import url('styles/theme/default.less');
 	#app {
 		width: 100%;
 		height: 100%;
@@ -17,12 +16,19 @@
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.page {
 		width: 100%;
 		min-height: 100%;
 		padding: 10px;
 		background: white;
 		box-sizing: border-box;
+	}
+	.echarts {
+		&,
+		& > div:first-child,
+		& > div > canvas {
+			width: 100% !important;
+		}
 	}
 </style>

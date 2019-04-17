@@ -1,9 +1,14 @@
 import axios from 'axios'
 import store from '@/store'
 import iView from 'iview'
+let baseURL = process.env.BASE_URL;
+if (process.env.NODE_ENV == "production") {
+	baseURL = 'http://39.98.173.170:9000/api/'
+}
+
 // 创建一个axios请求
 const service = axios.create({
-	baseURL: process.env.BASE_URL, // api 的 base_url
+	baseURL: baseURL, // api 的 base_url
 	timeout: 5000 // 超时时间
 })
 
