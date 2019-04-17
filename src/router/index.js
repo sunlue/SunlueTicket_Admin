@@ -22,7 +22,7 @@ export const pages = [{
 		component: () => import('@/views/views'),
 		meta: {
 			title: '可视化数据',
-			is_login: true
+			is_login: false
 		}
 	}
 ]
