@@ -141,16 +141,15 @@
 
 	.login .body {
 		background-image: url(../assets/login/loginBanner.jpg);
-		height: calc(100% - 388px);
-		height: -moz-calc(100% - 388px);
-		height: -webkit-calc(100% - 388px);
+		height: calc(100% - 352px);
+		height: -moz-calc(100% - 352px);
+		height: -webkit-calc(100% - 352px);
 		background-position: center center;
 		background-size: 100%;
 		min-width: 1240px;
-		min-height: 500px;
 		position: relative;
 		width: 100%;
-		margin-bottom: 56px;
+		min-height: 316px;
 	}
 
 	.login-box {
@@ -264,6 +263,10 @@
 		padding: 0px 4px;
 	}
 
+	.login .bottom{
+		margin:30px 0px 20px 0px;
+	}
+	
 	.login .bottom .row {
 		display: flex;
 		text-align: center;

@@ -2,7 +2,7 @@
 	<div id="app"><router-view /></div>
 </template>
 <style lang="less">
-	@import url('//at.alicdn.com/t/font_1065691_zryceo2sacs.css');
+	@import url('//at.alicdn.com/t/font_1065691_ox4wrqqg01.css');
 	@import url('styles/app.css');
 	@import url('styles/theme/default.less');
 	#app {

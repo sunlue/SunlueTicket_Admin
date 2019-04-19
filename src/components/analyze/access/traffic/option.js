@@ -11,8 +11,8 @@ const option = {
 			},
 			grid: {
 				top: 100,
-				left: 200,
-				right: 10,
+				left: 180,
+				right: 30,
 				bottom: 24
 			},
 			toolbox: {
@@ -39,7 +39,7 @@ const option = {
 				axisTick: {
 					alignWithLabel: true
 				},
-				data: data.week
+				data: data.date
 			}],
 			yAxis: [{
 				type: 'value',
@@ -74,6 +74,7 @@ const option = {
 			series: [{
 					name: '浏览次数(pv)',
 					type: 'line',
+					yAxisIndex: 0,
 					data: data.pv
 				}, {
 					name: '独立访客(uv)',

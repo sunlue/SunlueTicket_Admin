@@ -19,14 +19,32 @@
 			<Col span="24">
 				<Col span="16" class="col">
 					<Card>
+						<p slot="title"><span>票务分析</span></p>
+						<v-chart :options="echats.order.unified" :autoresize="true" />
+					</Card>
+				</Col>
+				<Col span="8" class="col">
+					<Card>
+						<p slot="title"><span>票务出票分析</span></p>
+						<v-chart :options="echats.ticket.generate" :autoresize="true" />
+					</Card>
+				</Col>
+				<Col span="24" class="col">
+					<Card>
+						<p slot="title"><span>本周订单量</span></p>
+						<v-chart :options="echats.order.unified" :autoresize="true" />
+					</Card>
+				</Col>
+				<Col span="16" class="col">
+					<Card>
 						<p slot="title"><span>本周访问量</span></p>
-						<v-chart :options="echats.access.visitor" />
+						<v-chart :options="echats.access.traffic" :autoresize="true" />
 					</Card>
 				</Col>
 				<Col span="8" class="col">
 					<Card>
 						<p slot="title"><span>用户访问来源</span></p>
-						<v-chart :options="echats.access.referer" />
+						<v-chart :options="echats.access.referer" :autoresize="true" />
 					</Card>
 				</Col>
 			</Col>
@@ -40,6 +58,9 @@
 		margin: -5px;
 		.col{
 			padding: 5px;
+			.ivu-card+.ivu-card{
+				margin-top:10px; 
+			}
 		}
 	}
 	.overview {
@@ -103,6 +124,13 @@
 					access:{
 						visitor:{},
 						referer:{},
+						traffic:{},
+					},
+					order:{
+						unified:{}
+					},
+					ticket:{
+						generate:{}
 					}
 				},
 				total:[{
@@ -113,37 +141,45 @@
 				},{
 					bgColor:'#FFB800',
 					icon:'md-person-add',
-					title:'累计点击',
+					title:'用户总数',
 					count:20
 				},{
 					bgColor:'#2F4056',
 					icon:'md-person-add',
-					title:'新增问答',
+					title:'今日出票',
 					count:20
 				},{
 					bgColor:'#1E9FFF',
 					icon:'md-person-add',
-					title:'分享统计',
+					title:'出票总数',
 					count:20
 				},{
 					bgColor:'#009688',
 					icon:'md-person-add',
-					title:'新增互动',
+					title:'今日收益',
 					count:20
 				},{
 					bgColor:'#FF5722',
 					icon:'md-person-add',
-					title:'新增页面',
+					title:'收益总数',
 					count:20
 				}]
 			}
 		},
 		mounted() {
-			analyze.access.visitor('line').then((data)=>{
-				this.echats.access.visitor=data;
-			})
 			analyze.access.referer('pie').then((data)=>{
 				this.echats.access.referer=data;
+			})
+			analyze.access.traffic().then((data)=>{
+				this.echats.access.traffic=data;
+			})
+			analyze.order.unified().then((data)=>{
+				this.echats.order.unified=data;
+			})
+			
+			analyze.ticket.generate().then((data)=>{
+				console.log(data)
+				this.echats.ticket.generate=data;
 			})
 		},
 		watch: {},

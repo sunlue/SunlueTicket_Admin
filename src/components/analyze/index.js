@@ -1,18 +1,8 @@
-import 'echarts/lib/chart/bar'
-import 'echarts/lib/chart/line'
-import 'echarts/lib/chart/pie'
+import '@/utils/echart'
 
-import 'echarts/lib/component/tooltip'
-import 'echarts/lib/component/toolbox'
-import 'echarts/lib/component/legend'
-import 'echarts/lib/component/title'
-
-import 'echarts'
-
-import {
-	visitor,
-	referer
-} from "./access"
+import {visitor,referer,traffic} from "./access"
+import {unified} from "./order"
+import {generate} from "./ticket"
 const method = {
 	access: {
 		muster: function(params) {
@@ -28,9 +18,9 @@ const method = {
 				resolve(dataColum);
 			})
 		},
-		visitor: function(type) {
+		traffic:function(){
 			return new Promise((resolve, reject) => {
-				visitor.get(type).then(response => {
+				traffic.get().then(response => {
 					resolve(response);
 				}).catch(error => {
 					reject(error)
@@ -47,6 +37,28 @@ const method = {
 			})
 		}
 	},
+	order:{
+		unified:function(){
+			return new Promise((resolve, reject) => {
+				unified.get().then(response => {
+					resolve(response);
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		}
+	},
+	ticket:{
+		generate:function(){
+			return new Promise((resolve, reject) => {
+				generate.get().then(response => {
+					resolve(response);
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		}
+	}
 }
 
 export default method;

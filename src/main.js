@@ -17,6 +17,10 @@ Vue.use(calendar)
 
 //图表插件
 import ECharts from 'vue-echarts'
+import themeBigData from '@/assets/echart/theme/big-data.json';
+import themeOrdinary from '@/assets/echart/theme/ordinary.json';
+ECharts.registerTheme('big-data', themeBigData);
+ECharts.registerTheme('ordinary', themeOrdinary);
 Vue.component('v-chart', ECharts)
 
 Vue.config.productionTip = false

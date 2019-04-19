@@ -1,9 +1,9 @@
-import * as visitors from './visitor/index'
-let visitor = visitors.default;
 import * as referers from './referer/index'
 let referer = referers.default;
+import * as traffics from './traffic/index'
+let traffic = traffics.default;
 export {
-	visitor,referer
+	referer,traffic
 }
 const install = function(Vue, options) {
 	const components = require.context('./', true, /.vue$/)
