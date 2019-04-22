@@ -109,6 +109,24 @@ const router = [{
 				is_login: true
 			},
 		}]
+	},
+	{
+		path: '/system',
+		name: 'system_index',
+		component: main,
+		meta: {
+			title: '控制中心',
+			is_login: true
+		},
+		children: [{
+			path: 'user',
+			name: 'system_user',
+			component: () => import('@/views/system/user.vue'),
+			meta: {
+				title: '用户管理',
+				is_login: true
+			},
+		}]
 	}
 ]
 export default router

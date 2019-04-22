@@ -2,7 +2,8 @@
 	<div class="page">
 		<Row class="overview">
 			<Col span="24">
-				<Col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:4}" class="col" v-for="(item,index) in total" :key="index">
+				<div v-for="(items,index) in total" :key="index">
+				<Col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:4}" class="col" v-for="(item,index) in items" :key="index">
 					<div class="total">
 						<div class="pull-left" :style="'background-color:'+item.bgColor">
 							<Icon :type="item.icon" class="icon" />
@@ -13,14 +14,15 @@
 						</div>
 					</div>
 				</Col>
+				</div>
 			</Col>
 		</Row>
 		<Row class="space">
 			<Col span="24">
 				<Col span="16" class="col">
 					<Card>
-						<p slot="title"><span>票务分析</span></p>
-						<v-chart :options="echats.order.unified" :autoresize="true" />
+						<p slot="title"><span>票务销售分析</span></p>
+						<v-chart :options="echats.ticket.salas" :autoresize="true" />
 					</Card>
 				</Col>
 				<Col span="8" class="col">
@@ -51,6 +53,105 @@
 		</row>
 	</div>
 </template>
+
+<script>
+	import analyze from '@/components/analyze'
+	export default {
+		name: 'index',
+		components: {},
+		data() {
+			return {
+				echats:{
+					access:{
+						visitor:{},
+						referer:{},
+						traffic:{},
+					},
+					order:{
+						unified:{}
+					},
+					ticket:{
+						generate:{},
+						salas:{}
+					}
+				},
+				total:{
+					member:{
+						'all':{
+							bgColor:'#FFB800',
+							icon:'md-person-add',
+							title:'用户总数',
+							count:0
+						},
+						'today':{
+							bgColor:'#393D49',
+							icon:'md-person-add',
+							title:'新增用户',
+							count:0
+						}
+					},
+					ticket:{
+						'all':{
+							bgColor:'#1E9FFF',
+							icon:'md-person-add',
+							title:'出票总数',
+							count:0
+						},
+						'today':{
+							bgColor:'#2F4056',
+							icon:'md-person-add',
+							title:'今日出票',
+							count:0
+						}
+					},
+					earn:{
+						'today':{
+							bgColor:'#009688',
+							icon:'md-person-add',
+							title:'今日收益',
+							count:'0.00'
+						},
+						'all':{
+							bgColor:'#FF5722',
+							icon:'md-person-add',
+							title:'收益总数',
+							count:'0.00'
+						}
+					}
+				}
+			}
+		},
+		created(){
+			this.$store.dispatch('getTotalBasis').then((result) => {
+				for(let i in result){
+					for(let j in result[i]){
+						let type=result[i][j]['type'];
+						this.total[i][type]['count']=result[i][j]['total']
+					}
+				}
+			})
+		},
+		mounted() {
+			analyze.access.referer('pie').then((data)=>{
+				this.echats.access.referer=data;
+			})
+			analyze.access.traffic().then((data)=>{
+				this.echats.access.traffic=data;
+			})
+			analyze.order.unified().then((data)=>{
+				this.echats.order.unified=data;
+			})
+			analyze.ticket.generate().then((data)=>{
+				this.echats.ticket.generate=data;
+			})
+			analyze.ticket.salas().then((data)=>{
+				this.echats.ticket.salas=data;
+			})
+		},
+		watch: {},
+		methods: {}
+	}
+</script>
 
 <style lang="less">
 	.space{
@@ -112,77 +213,3 @@
 		}
 	}
 </style>
-
-<script>
-	import analyze from '@/components/analyze'
-	export default {
-		name: 'index',
-		components: {},
-		data() {
-			return {
-				echats:{
-					access:{
-						visitor:{},
-						referer:{},
-						traffic:{},
-					},
-					order:{
-						unified:{}
-					},
-					ticket:{
-						generate:{}
-					}
-				},
-				total:[{
-					bgColor:'#393D49',
-					icon:'md-person-add',
-					title:'新增用户',
-					count:20
-				},{
-					bgColor:'#FFB800',
-					icon:'md-person-add',
-					title:'用户总数',
-					count:20
-				},{
-					bgColor:'#2F4056',
-					icon:'md-person-add',
-					title:'今日出票',
-					count:20
-				},{
-					bgColor:'#1E9FFF',
-					icon:'md-person-add',
-					title:'出票总数',
-					count:20
-				},{
-					bgColor:'#009688',
-					icon:'md-person-add',
-					title:'今日收益',
-					count:20
-				},{
-					bgColor:'#FF5722',
-					icon:'md-person-add',
-					title:'收益总数',
-					count:20
-				}]
-			}
-		},
-		mounted() {
-			analyze.access.referer('pie').then((data)=>{
-				this.echats.access.referer=data;
-			})
-			analyze.access.traffic().then((data)=>{
-				this.echats.access.traffic=data;
-			})
-			analyze.order.unified().then((data)=>{
-				this.echats.order.unified=data;
-			})
-			
-			analyze.ticket.generate().then((data)=>{
-				console.log(data)
-				this.echats.ticket.generate=data;
-			})
-		},
-		watch: {},
-		methods: {}
-	}
-</script>

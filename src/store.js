@@ -7,6 +7,7 @@ import ticket from '@/store/module/ticket'
 import pay from '@/store/module/pay'
 import order from '@/store/module/order'
 import config from '@/store/module/config'
+import analyze from '@/store/module/analyze'
 
 Vue.use(Vuex)
 
@@ -17,7 +18,8 @@ const store = new Vuex.Store({
 		pay,
 		ticket,
 		order,
-		config
+		config,
+		analyze
 	},
 	getters: {
 		isLogin: state => {

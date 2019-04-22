@@ -1,8 +1,8 @@
 import '@/utils/echart'
 
-import {visitor,referer,traffic} from "./access"
+import {referer,traffic} from "./access"
 import {unified} from "./order"
-import {generate} from "./ticket"
+import {generate,salas} from "./ticket"
 const method = {
 	access: {
 		muster: function(params) {
@@ -52,6 +52,15 @@ const method = {
 		generate:function(){
 			return new Promise((resolve, reject) => {
 				generate.get().then(response => {
+					resolve(response);
+				}).catch(error => {
+					reject(error)
+				})
+			})
+		},
+		salas:function(){
+			return new Promise((resolve, reject) => {
+				salas.get().then(response => {
 					resolve(response);
 				}).catch(error => {
 					reject(error)
