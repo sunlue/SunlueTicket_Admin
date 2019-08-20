@@ -1,6 +1,6 @@
 <template>
 	<div class="page ticket_setting_page">
-		<div class="menu">
+		<div class="menu scroll-y">
 			<Menu :active-name="activeMenu" :open-names="['default']" @on-select="menu">
 				<Submenu name="default">
 					<template slot="title">票务设置</template>
@@ -10,7 +10,7 @@
 			</Menu>
 		</div>
 		<div class="main-form">
-			<div class="main-area">
+			<div class="main-area scroll-y">
 				<div v-show="(activeMenu=='type')">
 					<Row>
 						<Col :xs="{span:16}" :sm="{span:12}" :lg="{span:8}">
@@ -690,10 +690,14 @@
 	}
 </script>
 
-<style>
+<style lang="less">
 	.ticket_setting_page {
 		height: 100%;
+		padding: 0px;
 		position: relative;
+		.scroll-y{
+			position: absolute;
+		}
 	}
 
 	.menu {
@@ -716,14 +720,11 @@
 	}
 
 	.main-area {
-		width: calc(100% + 17px);
-		width: -moz-calc(100% + 17px);
-		width: -webkit-calc(100% + 17px);
+		width: calc(100% - 240px);
+		position: absolute;
 		height: 100%;
 		padding: 10px;
-		overflow-y: scroll;
 		box-sizing: border-box;
-		border: 1px solid #F0F0F0;
 	}
 
 	.ivu-form-inline .ivu-form-item {

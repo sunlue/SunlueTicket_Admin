@@ -1,6 +1,6 @@
 <template>
 	<div class="page ticket_list_page">
-		<div class="menu">
+		<div class="menu scroll-y">
 			<Menu ref="menu" :active-name="activeMenu.uniqid" :open-names="['default']" @on-select="tabMenu">
 				<Submenu name="default">
 					<template slot="title">票务类型</template>
@@ -9,7 +9,7 @@
 			</Menu>
 		</div>
 		<div class="main-form">
-			<div class="main-area">
+			<div class="main-area scroll-y">
 				<div class="ticket_item" v-if="activeMenu.uniqid">
 					<Row>
 						<Col span="4">
@@ -301,6 +301,7 @@
 		<Modal ref="knowModal" v-model="knowModal.show" title="票务须知" footer-hide scrollable :z-index="1001" :closable="false" :mask-closable="false">
 			<Table border :data="knowModal.data" :columns="knowModal.columns" size="small"></Table>
 		</Modal>
+		
 		<Drawer :closable="false" width="414" v-model="knowModal.drawer.show" class-name="drawer">
 			<div slot="header" class="text-center">{{knowModal.drawer.title}}</div>
 			<p :style="knowModal.drawer.pSytle">预订说明</p>
@@ -600,7 +601,7 @@
 						return item;
 					}
 				})
-				that.getParam.pege = 1;
+				that.getParam.page = 1;
 				that.itemList = [];
 				this.render(activeMenu.uniqid, function() {
 					that.activeMenu = activeMenu;
@@ -749,10 +750,14 @@
 	}
 </script>
 
-<style>
+<style lang="less">
 	.ticket_list_page {
 		height: 100%;
+		padding: 0px;
 		position: relative;
+		.scroll-y{
+			position: absolute;
+		}
 	}
 
 	.ticket_list_page .menu {
@@ -775,14 +780,11 @@
 	}
 
 	.ticket_list_page .main-area {
-		width: calc(100% + 17px);
-		width: -moz-calc(100% + 17px);
-		width: -webkit-calc(100% + 17px);
+		width: calc(100% - 240px);
+		position: absolute;
 		height: 100%;
 		padding: 10px;
-		overflow-y: scroll;
 		box-sizing: border-box;
-		border: 1px solid #F0F0F0;
 	}
 
 	.ticket_list_page .ticket_item .row {

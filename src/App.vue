@@ -19,11 +19,13 @@
 
 	.page {
 		width: 100%;
-		min-height: 100%;
+		height: 100%;
 		padding: 10px;
 		background: white;
 		box-sizing: border-box;
+		position: relative;
 	}
+	
 	.echarts {
 		&,
 		& > div:first-child,

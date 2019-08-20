@@ -3,7 +3,9 @@ import store from '@/store'
 import iView from 'iview'
 let baseURL = process.env.BASE_URL;
 if (process.env.NODE_ENV == "production") {
-	baseURL = 'http://39.98.173.170:9000/api/'
+	baseURL = 'http://ticket.sunlue.com/api/'
+}else{
+	baseURL='http://ticket.sunlue.io/api/'
 }
 
 // 创建一个axios请求

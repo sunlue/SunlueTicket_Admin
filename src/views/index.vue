@@ -1,56 +1,58 @@
 <template>
-	<div class="page">
-		<Row class="overview">
-			<Col span="24">
-				<div v-for="(items,index) in total" :key="index">
-				<Col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:4}" class="col" v-for="(item,index) in items" :key="index">
-					<div class="total">
-						<div class="pull-left" :style="'background-color:'+item.bgColor">
-							<Icon :type="item.icon" class="icon" />
+	<div tag="page" class="page">
+		<div class="scroll-y">
+			<Row class="overview">
+				<Col span="24">
+					<div v-for="(items,index) in total" :key="index">
+					<Col :xs="{span:24}" :sm="{span:12}" :md="{span:8}" :xl="{span:4}" class="col" v-for="(item,index) in items" :key="index">
+						<div class="total">
+							<div class="pull-left" :style="'background-color:'+item.bgColor">
+								<Icon :type="item.icon" class="icon" />
+							</div>
+							<div class="pull-left">
+								<span>{{item.count}}</span>
+								<p>{{item.title}}</p>
+							</div>
 						</div>
-						<div class="pull-left">
-							<span>{{item.count}}</span>
-							<p>{{item.title}}</p>
-						</div>
+					</Col>
 					</div>
 				</Col>
-				</div>
-			</Col>
-		</Row>
-		<Row class="space">
-			<Col span="24">
-				<Col span="16" class="col">
-					<Card>
-						<p slot="title"><span>票务销售分析</span></p>
-						<v-chart :options="echats.ticket.salas" :autoresize="true" />
-					</Card>
+			</Row>
+			<Row class="space">
+				<Col span="24">
+					<Col span="16" class="col">
+						<Card>
+							<p slot="title"><span>票务销售分析</span></p>
+							<v-chart :options="echats.ticket.salas" :autoresize="true" />
+						</Card>
+					</Col>
+					<Col span="8" class="col">
+						<Card>
+							<p slot="title"><span>票务出票分析</span></p>
+							<v-chart :options="echats.ticket.generate" :autoresize="true" />
+						</Card>
+					</Col>
+					<Col span="24" class="col">
+						<Card>
+							<p slot="title"><span>本月订单量</span></p>
+							<v-chart :options="echats.order.unified" :autoresize="true" />
+						</Card>
+					</Col>
+					<Col span="16" class="col">
+						<Card>
+							<p slot="title"><span>本周访问量</span></p>
+							<v-chart :options="echats.access.traffic" :autoresize="true" />
+						</Card>
+					</Col>
+					<Col span="8" class="col">
+						<Card>
+							<p slot="title"><span>用户访问来源</span></p>
+							<v-chart :options="echats.access.referer" :autoresize="true" />
+						</Card>
+					</Col>
 				</Col>
-				<Col span="8" class="col">
-					<Card>
-						<p slot="title"><span>票务出票分析</span></p>
-						<v-chart :options="echats.ticket.generate" :autoresize="true" />
-					</Card>
-				</Col>
-				<Col span="24" class="col">
-					<Card>
-						<p slot="title"><span>本周订单量</span></p>
-						<v-chart :options="echats.order.unified" :autoresize="true" />
-					</Card>
-				</Col>
-				<Col span="16" class="col">
-					<Card>
-						<p slot="title"><span>本周访问量</span></p>
-						<v-chart :options="echats.access.traffic" :autoresize="true" />
-					</Card>
-				</Col>
-				<Col span="8" class="col">
-					<Card>
-						<p slot="title"><span>用户访问来源</span></p>
-						<v-chart :options="echats.access.referer" :autoresize="true" />
-					</Card>
-				</Col>
-			</Col>
-		</row>
+			</row>
+		</div>
 	</div>
 </template>
 
@@ -115,7 +117,7 @@
 							bgColor:'#FF5722',
 							icon:'md-person-add',
 							title:'收益总数',
-							count:'0.00'
+							count:'1.00'
 						}
 					}
 				}
@@ -147,13 +149,19 @@
 			analyze.ticket.salas().then((data)=>{
 				this.echats.ticket.salas=data;
 			})
-		},
-		watch: {},
-		methods: {}
+		}
 	}
 </script>
 
 <style lang="less">
+	div[tag="page"]{
+		padding:0px;
+		.scroll-y{
+			position: absolute;
+			width: 100%;
+			padding: 10px 5px;
+		}
+	}
 	.space{
 		padding: 5px;
 		margin: -5px;
@@ -204,6 +212,7 @@
 				font-size: 40px;
 				display: block;
 				color: #009688;
+				line-height: 60px;
 			}
 
 			p {

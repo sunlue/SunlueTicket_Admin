@@ -1,6 +1,6 @@
 <template>
 	<div class="page ticket_price_page">
-		<div class="menu">
+		<div class="menu scroll-y">
 			<Menu ref="menu" :active-name="activeMenu.code" :open-names="activeMenu.open" @on-select="tabMenu">
 				<Submenu :name="m.uniqid" v-for="(m,i) in menu" :key="i">
 					<template slot="title">{{m.name}}</template>
@@ -9,7 +9,7 @@
 			</Menu>
 		</div>
 		<div class="main-form">
-			<div class="main-area">
+			<div class="main-area scroll-y">
 				<full-calendar ref="calendar" :config="calendarSetting.config" :events="calendarSetting.events" />
 				<Modal v-model="calendarModal.open" :title="calendarModal.title">
 					<Form ref="calendarForm" :label-width="60" :model="calendarForm">
@@ -254,10 +254,14 @@
 	}
 </script>
 
-<style>
+<style lang="less">
 	.ticket_price_page {
 		height: 100%;
+		padding: 0px;
 		position: relative;
+		.scroll-y{
+			position: absolute;
+		}
 	}
 
 	.ticket_price_page .menu {
@@ -280,14 +284,11 @@
 	}
 
 	.ticket_price_page .main-area {
-		width: calc(100% + 17px);
-		width: -moz-calc(100% + 17px);
-		width: -webkit-calc(100% + 17px);
+		width: calc(100% - 240px);
+		position: absolute;
 		height: 100%;
 		padding: 10px;
-		overflow-y: scroll;
 		box-sizing: border-box;
-		border: 1px solid #F0F0F0;
 	}
 
 	.calendarTd {

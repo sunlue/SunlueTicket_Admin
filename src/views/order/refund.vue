@@ -1,6 +1,6 @@
 <template>
 	<div class="page order_refund_page">
-		<div class="menu">
+		<div class="menu scroll-y">
 			<Menu ref="menu" :active-name="activeMenu.code" :open-names="activeMenu.open" @on-select="tabMenu">
 				<MenuItem name="all">全部</MenuItem>
 				<Submenu :name="m.uniqid" v-for="(m,i) in menu" :key="i">
@@ -10,7 +10,7 @@
 			</Menu>
 		</div>
 		<div class="main-form">
-			<div class="main-area">
+			<div class="main-area scroll-y">
 				<Form ref="searchForm"  :model="searchForm" :label-width="0" inline v-if="(activeMenu.code=='all')">
 					<FormItem>
 						<Input type="text" v-model="searchForm.order_sn" placeholder="订单编号" />
@@ -344,11 +344,14 @@
 	}
 </script>
 
-<style>
+<style lang="less">
 	.order_refund_page {
 		height: 100%;
-		width: 100%;
+		padding: 0px;
 		position: relative;
+		.scroll-y{
+			position: absolute;
+		}
 	}
 
 	.order_refund_page .menu {
@@ -371,14 +374,11 @@
 	}
 
 	.order_refund_page .main-area {
-		width: calc(100% + 17px);
-		width: -moz-calc(100% + 17px);
-		width: -webkit-calc(100% + 17px);
+		width: calc(100% - 240px);
+		position: absolute;
 		height: 100%;
 		padding: 10px;
-		overflow-y: scroll;
 		box-sizing: border-box;
-		border: 1px solid #F0F0F0;
 	}
 
 	.ivu-form-inline .ivu-form-item {

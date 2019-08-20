@@ -1,149 +1,150 @@
 .ivu-layout.main {
 	height: 100vh;
 	position: relative;
-}
 
-.ivu-layout-header {
-	padding: 0px !important;
-	line-height: 50px !important;
-	height: 50px !important;
-	width: 100%;
-	position: relative;
-	background: #393d49 -webkit-gradient(linear, right top, left top, from(#393d49), to(#393d49)) !important;
-	background: #393d49 -webkit-linear-gradient(right, #393d49 0, #393d49 100%) !important;
-	background: #393d49 -o-linear-gradient(right, #393d49 0, #393d49 100%) !important;
-	background: #393d49 linear-gradient(-90deg, #393d49 0, #393d49 100%) !important;
-	background-color: #393d49;
-	border-top-color: #393d49;
-	border-bottom-color: #e9f2fb;
-	padding-left: 220px;
-	.logo {
-		background: #20222a;
-		width: 220px;
-		height: 100%;
-		padding: 5px;
-		box-sizing: border-box;
-		float: left;
-		img {
-			display: block;
-			margin: 0 auto;
-			max-height: 36px;
-			max-width: 168px;
-		}
-	}
-	.tools {
-		padding-left: 10px;
-		display: flex;
-		li {
-			padding: 0px 10px;
-			color: rgba(255, 255, 255, 0.7);
-			cursor: pointer;
-			&.avtive {
-				color: rgba(255, 255, 255, 1);
-			}
-		}
-	}
-	.user {
-		position: absolute;
-		right: 0px;
-		top: 0px;
-		li {
-			display: inline-block;
-			line-height: 50px;
-			height: 50px;
-			position: relative;
-			&:hover a + .child {
+	.ivu-layout-header {
+		padding: 0px !important;
+		line-height: 50px !important;
+		height: 50px !important;
+		width: 100%;
+		position: relative;
+		background: #393d49 -webkit-gradient(linear, right top, left top, from(#393d49), to(#393d49)) !important;
+		background: #393d49 -webkit-linear-gradient(right, #393d49 0, #393d49 100%) !important;
+		background: #393d49 -o-linear-gradient(right, #393d49 0, #393d49 100%) !important;
+		background: #393d49 linear-gradient(-90deg, #393d49 0, #393d49 100%) !important;
+		background-color: #393d49;
+		border-top-color: #393d49;
+		border-bottom-color: #e9f2fb;
+		padding-left: 220px;
+		.logo {
+			background: #20222a;
+			width: 220px;
+			height: 100%;
+			padding: 5px;
+			box-sizing: border-box;
+			float: left;
+			img {
 				display: block;
+				margin: 0 auto;
+				max-height: 36px;
+				max-width: 168px;
 			}
 		}
-		a {
-			display: inline-block;
-			padding: 0px 15px;
-			height: 50px;
-			position: relative;
-			color: rgba(255, 255, 255, 0.7);
-			& + dl.child {
-				display: none;
-				position: absolute;
-				z-index: 100;
-				background: white;
-				width: 100%;
-				border: 1px solid #d2d2d2;
-				border-top: none;
-				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-				line-height: 36px;
-				white-space: nowrap;
-				text-align: center;
-				-webkit-animation-duration: 0.5s;
-				animation-duration: 0.5s;
-				-webkit-animation-fill-mode: both;
-				animation-fill-mode: both;
-				transition: all 500ms;
-				dd {
-					cursor: pointer;
-					&:hover {
-						color: #777777;
+		.tools {
+			padding-left: 10px;
+			display: flex;
+			height: 100%;
+			li {
+				padding: 0px 10px;
+				color: rgba(255, 255, 255, 0.7);
+				cursor: pointer;
+				&.avtive {
+					color: rgba(255, 255, 255, 1);
+				}
+			}
+		}
+		.user {
+			position: absolute;
+			right: 0px;
+			top: 0px;
+			li {
+				display: inline-block;
+				line-height: 50px;
+				height: 50px;
+				position: relative;
+				&:hover a + .child {
+					display: block;
+				}
+			}
+			a {
+				display: inline-block;
+				padding: 0px 15px;
+				height: 50px;
+				position: relative;
+				color: rgba(255, 255, 255, 0.7);
+				& + dl.child {
+					display: none;
+					position: absolute;
+					z-index: 100;
+					background: white;
+					width: 100%;
+					border: 1px solid #d2d2d2;
+					border-top: none;
+					box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+					line-height: 36px;
+					white-space: nowrap;
+					text-align: center;
+					-webkit-animation-duration: 0.5s;
+					animation-duration: 0.5s;
+					-webkit-animation-fill-mode: both;
+					animation-fill-mode: both;
+					transition: all 500ms;
+					dd {
+						cursor: pointer;
+						&:hover {
+							color: #777777;
+						}
+					}
+				}
+				i.icon-dropdown {
+					position: absolute;
+					right: 0px;
+					top: 0px;
+					transition: all 500ms;
+				}
+				&:hover i.icon-dropdown {
+					transform: rotate(180deg);
+				}
+			}
+		}
+	}
+
+	.ivu-layout-sider {
+		height: calc(100vh - 100px);
+		.ivu-layout-sider-children {
+			overflow: hidden;
+			.left-menu {
+				width: calc(100% + 17px);
+				height: 100%;
+				overflow-y: scroll;
+				.close {
+					span {
+						transition: all 0.2s ease;
+						display: none;
+					}
+					i {
+						transform: translateX(5px);
+						transition: font-size 0.2s ease 0.2s, transform 0.2s ease 0.2s;
+						vertical-align: middle;
+						font-size: 22px;
+					}
+					.ivu-icon-ios-arrow-down {
+						transition: all 0.2s ease;
+						display: none;
 					}
 				}
 			}
-			i.icon-dropdown {
-				position: absolute;
-				right: 0px;
-				top: 0px;
-				transition: all 500ms;
-			}
-			&:hover i.icon-dropdown {
-				transform: rotate(180deg);
-			}
 		}
 	}
-}
 
-.ivu-layout-sider {
-	height: 100% !important;
-	.ivu-layout-sider-children {
-		overflow: hidden;
-		.left-menu {
-			width: calc(100% + 17px);
-			height: 100%;
-			overflow-y: scroll;
-			.close {
-				span {
-					transition: all 0.2s ease;
-					display: none;
-				}
-				i {
-					transform: translateX(5px);
-					transition: font-size 0.2s ease 0.2s, transform 0.2s ease 0.2s;
-					vertical-align: middle;
-					font-size: 22px;
-				}
-				.ivu-icon-ios-arrow-down {
-					transition: all 0.2s ease;
-					display: none;
-				}
+	.ivu-layout-footer {
+		background: #393d49 -webkit-gradient(linear, right top, left top, from(#393d49), to(#393d49)) !important;
+		background: #393d49 -webkit-linear-gradient(right, #393d49 0, #393d49 100%) !important;
+		background: #393d49 -o-linear-gradient(right, #393d49 0, #393d49 100%) !important;
+		background: #393d49 linear-gradient(-90deg, #393d49 0, #393d49 100%) !important;
+		background-color: #393d49 !important;
+		border-top-color: #393d49 !important;
+		border-bottom-color: #e9f2fb;
+		color: #ffffff;
+		font-size: 14px;
+		height: 50px;
+		line-height: 50px;
+		padding: 0px 10px !important;
+		.ivu-breadcrumb {
+			a,
+			span {
+				color: white;
 			}
-		}
-	}
-}
-
-.ivu-layout-footer {
-	background: #393d49 -webkit-gradient(linear, right top, left top, from(#393d49), to(#393d49)) !important;
-	background: #393d49 -webkit-linear-gradient(right, #393d49 0, #393d49 100%) !important;
-	background: #393d49 -o-linear-gradient(right, #393d49 0, #393d49 100%) !important;
-	background: #393d49 linear-gradient(-90deg, #393d49 0, #393d49 100%) !important;
-	background-color: #393d49 !important;
-	border-top-color: #393d49 !important;
-	border-bottom-color: #e9f2fb;
-	color: #ffffff;
-	font-size: 14px;
-	height: 50px;
-	line-height: 50px;
-	padding: 0px 10px !important;
-	.ivu-breadcrumb {
-		a,
-		span {
-			color: white;
 		}
 	}
 }

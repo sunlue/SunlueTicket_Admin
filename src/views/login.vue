@@ -91,8 +91,6 @@
 		components: {
 			drag: drag
 		},
-		created(){
-		},
 		methods: {
 			switchLoginType: function(type) {
 				this.loginType = type;
@@ -198,9 +196,9 @@
 	}
 
 	.login-box .form-block input {
-		height: 38px;
+		height: 42px;
 		line-height: 1.3;
-		line-height: 38px\9;
+		line-height: 42px\9;
 		border-width: 1px;
 		border-style: solid;
 		background-color: #fff;
@@ -215,7 +213,7 @@
 		-webkit-transition: all .3s;
 		box-sizing: border-box;
 		font-family: inherit;
-		font-size: inherit;
+		font-size: 14px;
 		font-style: inherit;
 		font-weight: inherit;
 	}
@@ -224,8 +222,8 @@
 		width: 100%;
 		background: #e63d2d;
 		display: inline-block;
-		height: 38px;
-		line-height: 38px;
+		height: 42px;
+		line-height: 42px;
 		padding: 0 18px;
 		color: #fff;
 		white-space: nowrap;
