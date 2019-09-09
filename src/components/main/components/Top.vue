@@ -5,49 +5,39 @@
 			<li @click="shrink()">
 				<Tooltip content="展开/收缩" placement="bottom-start"><i class="iconfont icon-shrink"></i></Tooltip>
 			</li>
-			<li @click="bigdata()">
+			<li @click="bigdata()" v-if="false">
 				<Tooltip content="可视化" placement="bottom-start"><i class="iconfont icon-bigdata"></i></Tooltip>
 			</li>
 		</ul>
-		<div class="user">
-			<ul>
-				<li>
-					<a href="javascript:;">
-						<span>系统管理员</span>
-						<i class="iconfont icon-dropdown"></i>
-					</a>
-					<dl class="child">
-						<dd>基本资料</dd>
-						<dd>修改密码</dd>
-						<dd v-on:click="logout">退出</dd>
-					</dl>
-				</li>
-				<li>
-					<a href="javascript:;"><i class="iconfont icon-more"></i></a>
-				</li>
-			</ul>
+		<div class="right">
+			<Dropdown @on-click="userAction">
+				<a href="javascript:void(0)">
+					您好！{{userInfo.name || userInfo.account}}
+					<Icon :size="18" type="md-arrow-dropdown" />
+				</a>
+				<DropdownMenu slot="list">
+					<DropdownItem name="edit_password" v-if="false">修改密码</DropdownItem>
+					<DropdownItem name="logout" divided>退出登录</DropdownItem>
+				</DropdownMenu>
+			</Dropdown>
 		</div>
 	</Header>
 </template>
 
 <script>
-import menu from '@/router/router';
 export default {
 	data() {
-		return {};
-	},
-	created() {
-		this.navBar = menu;
+		let that=this;
+		return {
+			userInfo:that.$store.getters.userInfo
+		};
 	},
 	methods: {
 		shrink() {
 			this.$emit('shrink');
 		},
-		bigdata() {
-			let { href } = this.$router.resolve({
-				name: 'views'
-			});
-			window.open(href);
+		userAction(name) {
+			this[name]();
 		},
 		logout() {
 			var that = this;

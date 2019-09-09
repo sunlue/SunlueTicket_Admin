@@ -3,7 +3,7 @@ import store from '@/store'
 import iView from 'iview'
 let baseURL = process.env.BASE_URL;
 if (process.env.NODE_ENV == "production") {
-	baseURL = 'http://ticket.sunlue.com/api/'
+	baseURL = 'http://39.98.56.58:9000/api/'
 }else{
 	baseURL='http://ticket.sunlue.io/api/'
 }

@@ -7,7 +7,7 @@ ticket.prototype.get = function(type) {
 		request({
 			url: 'analyze/ticket/generate',
 			method: 'post',
-		}).then(response => {
+		}).then((response) => {
 			resolve(option.pie(response.data));
 		}).catch(error => {
 			reject(error)

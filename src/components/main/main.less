@@ -43,60 +43,26 @@
 				}
 			}
 		}
-		.user {
+		.right {
 			position: absolute;
+			height: 100%;
 			right: 0px;
 			top: 0px;
-			li {
-				display: inline-block;
-				line-height: 50px;
-				height: 50px;
-				position: relative;
-				&:hover a + .child {
-					display: block;
-				}
+			.ivu-dropdown{
+				margin-right: 10px;
 			}
 			a {
-				display: inline-block;
-				padding: 0px 15px;
-				height: 50px;
-				position: relative;
 				color: rgba(255, 255, 255, 0.7);
-				& + dl.child {
-					display: none;
-					position: absolute;
-					z-index: 100;
-					background: white;
-					width: 100%;
-					border: 1px solid #d2d2d2;
-					border-top: none;
-					box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-					line-height: 36px;
-					white-space: nowrap;
-					text-align: center;
-					-webkit-animation-duration: 0.5s;
-					animation-duration: 0.5s;
-					-webkit-animation-fill-mode: both;
-					animation-fill-mode: both;
-					transition: all 500ms;
-					dd {
-						cursor: pointer;
-						&:hover {
-							color: #777777;
-						}
-					}
-				}
-				i.icon-dropdown {
-					position: absolute;
-					right: 0px;
-					top: 0px;
-					transition: all 500ms;
-				}
-				&:hover i.icon-dropdown {
-					transform: rotate(180deg);
+				&:hover{
+					color: white;
 				}
 			}
+			.ivu-icon-md-more{
+				margin-right: 6px;
+				cursor: pointer;
+			}
 		}
+		
 	}
 
 	.ivu-layout-sider {
@@ -107,10 +73,19 @@
 				width: calc(100% + 17px);
 				height: 100%;
 				overflow-y: scroll;
+				.ivu-tooltip,span.nav {
+					display: inline-block;
+					overflow: hidden;
+					width: 120px;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					vertical-align: bottom;
+					transition: width 0.2s ease 0.2s;
+				}
 				.close {
-					span {
+					.ivu-tooltip,span.nav {
 						transition: all 0.2s ease;
-						display: none;
+						width: 0px;
 					}
 					i {
 						transform: translateX(5px);
@@ -119,12 +94,21 @@
 						font-size: 22px;
 					}
 					.ivu-icon-ios-arrow-down {
-						transition: all 0.2s ease;
+						transition: all 0.8s ease;
 						display: none;
+					}
+				}
+				.ivu-menu-vertical{
+					.ivu-menu-item,.ivu-menu-submenu-title{
+						// padding: 8px;
 					}
 				}
 			}
 		}
+	}
+
+	.ivu-layout-content{
+		overflow-y: hidden;
 	}
 
 	.ivu-layout-footer {
@@ -141,10 +125,19 @@
 		line-height: 50px;
 		padding: 0px 10px !important;
 		.ivu-breadcrumb {
-			a,
-			span {
+			a,span {
 				color: white;
 			}
+		}
+	}
+
+	@media (max-width:1366px){
+		.ivu-layout-sider {
+			height: calc(100vh - 90px);
+		}
+		.ivu-layout-footer{
+			height: 40px;
+			line-height: 40px;
 		}
 	}
 }

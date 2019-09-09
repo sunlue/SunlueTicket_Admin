@@ -13,8 +13,7 @@ router.beforeEach((to, from, next) => {
 	if (to.meta.is_login) {
 		var isLogin = sessionStorage.getItem('isLogin');
 		if (isLogin) {
-			store.state.user.isLogin = true;
-			store.state.user.token = store.getters.token;
+			store.commit('REFRESH_LOGIN')
 			next();
 		} else {
 			next({

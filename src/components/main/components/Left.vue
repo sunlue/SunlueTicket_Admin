@@ -5,16 +5,16 @@
 			:class="classs" :open-names="openMenu"  @on-select="selectMenu" @on-open-change="openMenuChange">
 				<MenuItem name="main" :to="{ name: 'main' }">
 					<Icon type="ios-navigate"></Icon>
-					<span>控制台</span>
+					<span class="nav">控制台</span>
 				</MenuItem>
 				<Submenu :name="nav.name" v-for="(nav, index) in navMenu" :key="index">
 					<template slot="title" v-if="nav.meta">
 						<Icon type="ios-navigate"></Icon>
-						<span>{{ nav.meta.title }}</span>
+						<span class="nav">{{ nav.meta.title }}</span>
 					</template>
 					<template v-if="nav.children">
 						<MenuItem :name="menu.name" v-for="(menu, j) in nav.children" :key="j" :to="{ name: menu.name }">
-							<span>{{ menu.meta.title }}</span>
+							<span class="nav">{{ menu.meta.title }}</span>
 						</MenuItem>
 					</template>
 				</Submenu>

@@ -19,11 +19,11 @@
 								<Row>
 									<Col span="14">
 									<Input type="text" v-model="item.name">
-									<span slot="append">
-										<Tooltip content="保存" placement="bottom">
-											<Icon class="iconfont icon-save" @click="tickeTypeFormSave(item,index)" />
-										</Tooltip>
-									</span>
+										<span slot="append">
+											<Tooltip content="保存" placement="bottom">
+												<Icon class="iconfont icon-save" @click="tickeTypeFormSave(item,index)" />
+											</Tooltip>
+										</span>
 									</Input>
 									</Col>
 									<Col span="4" offset="1" class="text-center">

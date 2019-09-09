@@ -10,7 +10,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
-    "core-js": "^2.6.5",
+    "core-js": "^2.6.9",
     "echarts": "^4.2.1",
     "iview": "^3.3.3",
     "jquery": "^3.3.1",

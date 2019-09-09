@@ -2,10 +2,16 @@ const option = {
 	bar: function(data) {
 		return {
 			color:['#5793f3', '#d14a61', '#675bba', "#3d52fa",'#009688',"#27dec6","#f724d7","#ff4958"],
+			title: {
+				show: data.legend.length > 0 ? false : true,
+				text: '暂无销售数据',
+				x: 'center',
+				y: 'center'
+			},
 			tooltip : {
 				trigger: 'axis',
-				axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-					type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+				axisPointer : {
+					type : 'shadow'
 				}
 			},
 			legend: {
